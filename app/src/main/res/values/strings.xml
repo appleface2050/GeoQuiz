@@ -12,4 +12,5 @@
     <string name="question_americas">americas</string>
     <string name="question_asia">wode\'asia</string>
     <string name="next_button">Next</string>
+    <string name="pre_button">Prev</string>
 </resources>
