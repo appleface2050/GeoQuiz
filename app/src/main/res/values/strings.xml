@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">GeoQuiz</string>
-    <string name="question_text">Canberra is the capital of Australia.></string>
+    <!--<string name="question_text"></string>-->
     <string name="true_button">True</string>
     <string name="false_button">False</string>
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
+    <string name="question_australia">Canberra is the capital of Australia</string>
+    <string name="question_oceans">oceans</string>
+    <string name="question_mideast">mideast</string>
+    <string name="question_africa">africa</string>
+    <string name="question_americas">americas</string>
+    <string name="question_asia">wode\'asia</string>
+    <string name="next_button">Next</string>
 </resources>
