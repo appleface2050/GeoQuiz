@@ -1,7 +1,10 @@
 package com.shangziqi.dandan.geoquiz;
 
+import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +15,15 @@ import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
 
+    private static final String TAG = "QuizActivity";
+
+    private static final String KEY_INDEX = "index";
+
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
     private Button mPreButton;
+    private Button mCheatButton;
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[]{
@@ -31,6 +39,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
     private void updateQuestion() {
+//        Log.d(TAG, "update question", new Exception());
         if (mCurrentIndex < 0) {
             mCurrentIndex = 0;
         }
@@ -53,16 +62,51 @@ public class QuizActivity extends AppCompatActivity {
 
 
     @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart() called");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume() called");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "OnPause() called");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop() called");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.i(TAG, "onSaveInstanceState");
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
 
-        mQuestionTextView = (TextView) findViewById(R.id.textView);
-//        int question = mQuestionBank[mCurrentIndex].getTextResId();
-//        mQuestionTextView.setText(question);
+        if (savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        }
 
+        mQuestionTextView = (TextView) findViewById(R.id.textView);
 
         mTrueButton = (Button) findViewById(R.id.button2);
+
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,9 +142,6 @@ public class QuizActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
-//                int question = mQuestionBank[mCurrentIndex].getTextResId();
-//                mQuestionTextView.setText(question);
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 updateQuestion();
             }
@@ -114,5 +155,17 @@ public class QuizActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
+
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // start cheat
+                Intent intent = new Intent(QuizActivity.this, CheatActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
     }
 }
