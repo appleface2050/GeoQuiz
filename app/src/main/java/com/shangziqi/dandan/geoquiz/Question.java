@@ -10,8 +10,8 @@ public class Question {
     private boolean mAnswerTrue;
 
     public Question(int textResId, boolean answerTrue){
-        mTextResId = textResId;
-        mAnswerTrue = answerTrue;
+        this.mTextResId = textResId;
+        this.mAnswerTrue = answerTrue;
     }
 
     public int getTextResId() {
